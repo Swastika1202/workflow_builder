@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useWorkflow } from '../context/WorkflowContext';
 
 const Header = () => {
-    const { undo, redo, saveWorkflow, canUndo, canRedo } = useWorkflow();
+    const { undo, redo, saveWorkflow, canUndo, canRedo, createNewWorkflow } = useWorkflow();
     const navigate = useNavigate();
 
     const handleSave = () => {
@@ -16,6 +16,13 @@ const Header = () => {
 
     const handleBack = () => {
         navigate('/workflows');
+    };
+
+    const handleNew = () => {
+        if (window.confirm("Do you want to discard your workflow and start with a new one?")) {
+            createNewWorkflow();
+            document.querySelector('.workflow-main')?.scrollIntoView({ behavior: 'smooth' });
+        }
     };
 
     return (
@@ -33,9 +40,7 @@ const Header = () => {
                     <button className="btn-link" onClick={redo} disabled={!canRedo}>Redo</button>
                 </div>
                 <div className="v-sep"></div>
-                <button className="btn-solid tour-new-btn" onClick={() => {
-                    document.querySelector('.workflow-main').scrollIntoView({ behavior: 'smooth' });
-                }}>+ New</button>
+                <button className="btn-solid tour-new-btn" onClick={handleNew}>+ New</button>
                 <button className="btn-solid tour-save-btn" onClick={handleSave}>Save Design</button>
             </div>
         </header>
