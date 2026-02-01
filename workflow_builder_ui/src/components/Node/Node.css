@@ -1,0 +1,185 @@
+.node-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.node-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 10;
+}
+
+.pro-node-card {
+    background: white;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-pro);
+    width: 200px;
+    box-shadow: var(--shadow-node);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.pro-node-card:hover {
+    border-color: var(--accent-primary);
+    box-shadow: var(--shadow-float);
+    transform: translateY(-2px);
+}
+
+.node-type-indicator {
+    height: 4px;
+    width: 100%;
+}
+
+.type-start .node-type-indicator {
+    background: var(--color-success);
+}
+
+.type-action .node-type-indicator {
+    background: var(--accent-primary);
+}
+
+.type-branch .node-type-indicator {
+    background: var(--color-warning);
+}
+
+.type-end .node-type-indicator {
+    background: var(--color-danger);
+}
+
+.node-card-content {
+    padding: 12px 16px;
+}
+
+.node-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.node-icon {
+    color: var(--text-ghost);
+    display: flex;
+}
+
+.node-type-text {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-ghost);
+    flex: 1;
+}
+
+.del-btn {
+    background: none;
+    border: none;
+    color: var(--text-ghost);
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    transition: color 0.2s;
+}
+
+.del-btn:hover {
+    color: var(--color-danger);
+}
+
+.pro-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-main);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.edit-glyph {
+    font-size: 10px;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.pro-node-card:hover .edit-glyph {
+    opacity: 0.3;
+}
+
+.pro-input {
+    width: 100%;
+    border: 1px solid var(--accent-primary);
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: 14px;
+    outline: none;
+}
+
+/* Vertical Connection Line */
+.pro-line-v {
+    width: 2px;
+    height: 32px;
+    background: linear-gradient(180deg, var(--connector-color) 0%, var(--accent-primary) 50%, var(--connector-color) 100%);
+    background-size: 100% 200%;
+    animation: flowLine 2s linear infinite;
+}
+
+@keyframes flowLine {
+    0% {
+        background-position: 0% 0%;
+    }
+
+    100% {
+        background-position: 0% -200%;
+    }
+}
+
+.node-children-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 80px;
+    position: relative;
+    padding-top: 40px;
+}
+
+/* Rounded Connector for Branches */
+.node-children-row::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 15%;
+    right: 15%;
+    height: 2px;
+    background: var(--connector-color);
+    border-radius: 4px;
+}
+
+.node-children-row::after {
+    content: '';
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    width: 2px;
+    height: 40px;
+    background: var(--connector-color);
+}
+
+.child-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.child-wrapper::before {
+    content: '';
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    width: 2px;
+    height: 40px;
+    background: var(--connector-color);
+}

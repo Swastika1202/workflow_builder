@@ -1,0 +1,40 @@
+.canvas-container {
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-primary);
+    background-image:
+        radial-gradient(circle, var(--line-color) 1px, transparent 1.5px);
+    background-size: 30px 30px;
+    overflow: auto;
+    display: flex;
+    justify-content: center;
+    padding: 80px 40px;
+    scroll-behavior: smooth;
+}
+
+.canvas-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100%;
+    width: fit-content;
+}
+
+/* Scrollbar Styling */
+.canvas-container::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.canvas-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.canvas-container::-webkit-scrollbar-thumb {
+    background: var(--line-color);
+    border-radius: 4px;
+}
+
+.canvas-container::-webkit-scrollbar-thumb:hover {
+    background: var(--text-secondary);
+}

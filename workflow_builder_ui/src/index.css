@@ -1,0 +1,17 @@
+@import './styles/variables.css';
+
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  /* Canvas will handle scroll */
+}
+
+/* Reset buttons */
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}

@@ -1,0 +1,96 @@
+.pro-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(2px);
+}
+
+.pro-modal {
+    background: white;
+    width: 340px;
+    border-radius: var(--radius-pro);
+    box-shadow: var(--shadow-float);
+    overflow: hidden;
+    animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.pro-modal header {
+    padding: 16px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.pro-modal header h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.close-x {
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: var(--text-ghost);
+    cursor: pointer;
+}
+
+.pro-options {
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.pro-opt-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    background: #f9fafb;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.pro-opt-btn:hover {
+    background: white;
+    border-color: var(--accent-primary);
+    transform: translateX(2px);
+}
+
+.opt-marker {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.opt-text strong {
+    display: block;
+    font-size: 14px;
+    color: var(--text-main);
+}
+
+.opt-text span {
+    font-size: 12px;
+    color: var(--text-ghost);
+}
