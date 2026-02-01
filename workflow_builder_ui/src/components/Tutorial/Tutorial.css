@@ -14,6 +14,19 @@
     /* Ensure it is top-most */
 }
 
+@media (max-width: 768px) {
+    .tutorial-tooltip {
+        max-width: 90vw !important;
+    }
+
+    .tutorial-restart-btn {
+        bottom: 16px;
+        right: 16px;
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+}
+
 /* Container for content */
 .tutorial-tooltip-container {
     padding: 24px !important;

@@ -38,3 +38,9 @@
 .canvas-container::-webkit-scrollbar-thumb:hover {
     background: var(--text-secondary);
 }
+
+@media (max-width: 768px) {
+    .canvas-container {
+        padding: 40px 20px;
+    }
+}
