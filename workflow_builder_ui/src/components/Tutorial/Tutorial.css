@@ -1,0 +1,156 @@
+/* Tutorial.css - High Contrast & Visibility Fixes */
+
+.tutorial-tooltip {
+    background-color: var(--bg-node, #ffffff) !important;
+    border-radius: var(--radius-pro, 12px) !important;
+    box-shadow: var(--shadow-float) !important;
+    font-family: var(--font-main, 'Inter', sans-serif) !important;
+    max-width: 360px !important;
+    /* Prevent it from being too wide */
+    width: 100% !important;
+    overflow: hidden;
+    border: 1px solid var(--border-subtle, #e5e7eb) !important;
+    z-index: 99999 !important;
+    /* Ensure it is top-most */
+}
+
+/* Container for content */
+.tutorial-tooltip-container {
+    padding: 24px !important;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    /* Space between text and buttons */
+    position: relative;
+    background-color: white !important;
+    /* Strict solid background */
+}
+
+/* Title Styling */
+.tutorial-tooltip-title {
+    font-size: 1.125rem !important;
+    /* 18px */
+    font-weight: 600 !important;
+    color: var(--text-main, #111827) !important;
+    margin: 0 !important;
+    line-height: 1.4 !important;
+}
+
+/* Content Text Styling */
+.tutorial-tooltip-content {
+    font-size: 0.95rem !important;
+    line-height: 1.6 !important;
+    color: var(--text-dim, #4b5563) !important;
+    margin: 0 !important;
+}
+
+/* Footer / Buttons Area */
+.tutorial-tooltip-footer {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    margin-top: 8px !important;
+    /* Extra breathing room */
+    padding-top: 16px !important;
+    border-top: 1px solid var(--border-subtle, #f3f4f6) !important;
+}
+
+/* Step Counter */
+.tutorial-step-counter {
+    color: var(--text-ghost, #9ca3af) !important;
+    font-size: 0.85rem !important;
+    font-weight: 500 !important;
+}
+
+/* Button Group (Back + Next) */
+.tutorial-btn-group {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+/* Floating Restart Button */
+.tutorial-restart-btn {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    /* changed from fixed width/height circle to pill */
+    padding: 12px 24px;
+    border-radius: 30px;
+    background-color: var(--accent-primary, #4f46e5);
+    color: white;
+    border: none;
+    box-shadow: 0 4px 14px rgba(79, 70, 229, 0.4);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    /* space between icon and text */
+    font-size: 1rem;
+    font-weight: 600;
+    z-index: 50;
+    /* High enough but below modals */
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.tutorial-restart-btn:hover {
+    transform: scale(1.1) rotate(10deg);
+    background-color: #4338ca;
+    box-shadow: 0 6px 20px rgba(79, 70, 229, 0.5);
+}
+
+.tutorial-restart-btn:active {
+    transform: scale(0.95);
+}
+
+/* Primary Button (Next/Finish) */
+.tutorial-button-primary {
+    background-color: var(--accent-primary, #4f46e5) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 6px !important;
+    padding: 8px 16px !important;
+    font-size: 0.875rem !important;
+    font-weight: 500 !important;
+    cursor: pointer !important;
+    transition: background-color 0.2s;
+    outline: none !important;
+}
+
+.tutorial-button-primary:hover {
+    background-color: #4338ca !important;
+    /* Slightly darker indigo */
+}
+
+/* Back Button */
+.tutorial-button-back {
+    background: transparent !important;
+    color: var(--text-dim, #6b7280) !important;
+    border: 1px solid var(--border-bold, #d1d5db) !important;
+    border-radius: 6px !important;
+    padding: 8px 16px !important;
+    font-size: 0.875rem !important;
+    font-weight: 500 !important;
+    cursor: pointer !important;
+    transition: all 0.2s;
+}
+
+.tutorial-button-back:hover {
+    background-color: #f9fafb !important;
+    color: var(--text-main, #111827) !important;
+}
+
+/* Skip Button */
+.tutorial-button-skip {
+    background: transparent !important;
+    color: var(--text-ghost, #9ca3af) !important;
+    border: none !important;
+    font-size: 0.875rem !important;
+    cursor: pointer !important;
+    padding: 8px !important;
+}
+
+.tutorial-button-skip:hover {
+    color: var(--text-dim, #4b5563) !important;
+    text-decoration: underline;
+}

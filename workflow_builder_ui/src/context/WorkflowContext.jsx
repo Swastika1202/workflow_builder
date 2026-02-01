@@ -1,8 +1,10 @@
-import React, { createContext, useContext, useReducer, useCallback } from 'react';
+import React, { createContext, useContext, useReducer, useCallback, useState, useEffect } from 'react';
 import { INITIAL_STATE, NODE_TYPES } from '../constants';
 
 // Simple ID generator
 const generateId = () => 'node_' + Math.random().toString(36).substr(2, 9);
+// UUID for workflows
+const generateWorkflowId = () => 'wf_' + Math.random().toString(36).substr(2, 9);
 
 const WorkflowContext = createContext(null);
 
@@ -136,6 +138,13 @@ const workflowReducer = (state, action) => {
                 future: future.slice(1)
             };
 
+        case 'SET_WORKFLOW':
+            return {
+                past: [],
+                present: action.payload,
+                future: []
+            };
+
         case 'ADD_NODE':
         case 'DELETE_NODE':
         case 'UPDATE_NODE_LABEL': {
@@ -156,6 +165,24 @@ const workflowReducer = (state, action) => {
 
 export const WorkflowProvider = ({ children }) => {
     const [state, dispatch] = useReducer(workflowReducer, initialContextState);
+    const [savedWorkflows, setSavedWorkflows] = useState([]);
+
+    // Load from local storage on mount
+    useEffect(() => {
+        const stored = localStorage.getItem('workflow_builder_saves');
+        if (stored) {
+            try {
+                setSavedWorkflows(JSON.parse(stored));
+            } catch (e) {
+                console.error("Failed to parse saved workflows", e);
+            }
+        }
+    }, []);
+
+    // Save to local storage whenever savedWorkflows changes
+    useEffect(() => {
+        localStorage.setItem('workflow_builder_saves', JSON.stringify(savedWorkflows));
+    }, [savedWorkflows]);
 
     const addNode = (parentId, nodeType, childId = null) => {
         dispatch({ type: 'ADD_NODE', payload: { parentId, nodeType, childId } });
@@ -172,16 +199,52 @@ export const WorkflowProvider = ({ children }) => {
     const undo = useCallback(() => dispatch({ type: 'UNDO' }), []);
     const redo = useCallback(() => dispatch({ type: 'REDO' }), []);
 
-    const saveWorkflow = () => {
-        console.log('--- WORKFLOW DATA ---');
-        console.log(JSON.stringify(state.present, null, 2));
-        console.log('---------------------');
-        alert('Workflow data printed to console! Open DevTools (F12) to see it.');
+    // Save current state as a new or existing workflow
+    const saveWorkflow = (name, id = null) => {
+        const newWorkflow = {
+            id: id || generateWorkflowId(),
+            name: name,
+            date: new Date().toISOString(),
+            data: state.present
+        };
+
+        // Bonus Requirement: Log entire workflow data structure to console
+        console.log("Workflow Data Structure:", newWorkflow.data);
+
+        setSavedWorkflows(prev => {
+            const existingIndex = prev.findIndex(w => w.id === id);
+            if (existingIndex >= 0) {
+                const updated = [...prev];
+                updated[existingIndex] = newWorkflow;
+                return updated;
+            }
+            return [newWorkflow, ...prev];
+        });
+
+        return newWorkflow.id;
+    };
+
+    const loadWorkflow = (id) => {
+        const workflow = savedWorkflows.find(w => w.id === id);
+        if (workflow) {
+            dispatch({ type: 'SET_WORKFLOW', payload: workflow.data });
+            return true;
+        }
+        return false;
+    };
+
+    const deleteSavedWorkflow = (id) => {
+        setSavedWorkflows(prev => prev.filter(w => w.id !== id));
+    };
+
+    const createNewWorkflow = () => {
+        dispatch({ type: 'SET_WORKFLOW', payload: INITIAL_STATE });
     };
 
     return (
         <WorkflowContext.Provider value={{
             state: state.present,
+            savedWorkflows,
             canUndo: state.past.length > 0,
             canRedo: state.future.length > 0,
             addNode,
@@ -189,7 +252,10 @@ export const WorkflowProvider = ({ children }) => {
             updateNodeLabel,
             undo,
             redo,
-            saveWorkflow
+            saveWorkflow,
+            loadWorkflow,
+            deleteSavedWorkflow,
+            createNewWorkflow
         }}>
             {children}
         </WorkflowContext.Provider>

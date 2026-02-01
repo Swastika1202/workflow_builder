@@ -1,0 +1,45 @@
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useWorkflow } from '../context/WorkflowContext';
+
+const Header = () => {
+    const { undo, redo, saveWorkflow, canUndo, canRedo } = useWorkflow();
+    const navigate = useNavigate();
+
+    const handleSave = () => {
+        const name = window.prompt("Enter a name for your workflow:", "My Workflow");
+        if (name) {
+            saveWorkflow(name);
+            alert('Workflow saved successfully!');
+        }
+    };
+
+    const handleBack = () => {
+        navigate('/workflows');
+    };
+
+    return (
+        <header className="pro-header">
+            <div className="logo-group" style={{ cursor: 'pointer' }} onClick={() => navigate('/')}>
+                <div className="icon">◈</div>
+                <h1>Workflow Core</h1>
+                <span className="badge">v2.0</span>
+            </div>
+            <div className="actions-group">
+                <button className="btn-link tour-my-workflows" onClick={handleBack}>My Workflows</button>
+                <div className="v-sep"></div>
+                <div className="tour-undo-redo" style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                    <button className="btn-link" onClick={undo} disabled={!canUndo}>Undo</button>
+                    <button className="btn-link" onClick={redo} disabled={!canRedo}>Redo</button>
+                </div>
+                <div className="v-sep"></div>
+                <button className="btn-solid tour-new-btn" onClick={() => {
+                    document.querySelector('.workflow-main').scrollIntoView({ behavior: 'smooth' });
+                }}>+ New</button>
+                <button className="btn-solid tour-save-btn" onClick={handleSave}>Save Design</button>
+            </div>
+        </header>
+    );
+};
+
+export default Header;
