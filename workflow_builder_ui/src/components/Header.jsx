@@ -28,9 +28,14 @@ const Header = () => {
     return (
         <header className="pro-header">
             <div className="logo-group" style={{ cursor: 'pointer' }} onClick={() => navigate('/')}>
-                <div className="icon">◈</div>
-                <h1>Workflow Core</h1>
-                <span className="badge">v2.0</span>
+                <div className="app-logo">
+                    <div className="logo-node top"></div>
+                    <div className="logo-line" style={{ transform: 'rotate(-45deg)', left: '8px', top: '10px' }}></div>
+                    <div className="logo-line" style={{ transform: 'rotate(45deg)', right: '8px', top: '10px' }}></div>
+                    <div className="logo-node bottom-left"></div>
+                    <div className="logo-node bottom-right"></div>
+                </div>
+                <h1>Workflow Builder</h1>
             </div>
             <div className="actions-group">
                 <button className="btn-link tour-my-workflows" onClick={handleBack}>My Workflows</button>
