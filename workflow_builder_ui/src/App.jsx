@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { WorkflowProvider } from './context/WorkflowContext';
 import Dashboard from './pages/Dashboard';
 import Builder from './pages/Builder';
-import './app.css';
+import './App.css';
 
 const App = () => {
   return (
