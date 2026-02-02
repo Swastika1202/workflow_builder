@@ -56,10 +56,8 @@
 
 | **Dashboard View** | **Node Interaction** |
 |:---:|:---:|
-| ![Dashboard Placeholder](https://via.placeholder.com/400x300/e0e0e0/333333?text=Dashboard+UI) | ![Interaction Placeholder](https://via.placeholder.com/400x300/e0e0e0/333333?text=Add+Node+Modal) |
-| *The main canvas showing a complex workflow tree.* | *Context-sensitive modal to add Actions or Branches.* |
-
-> *Note: Replace the headers above with actual screenshots of your application located in `src/assets/screenshots`.*
+| ![Initial Dashboard](src/assets/screenshots/dashboard_initial.png) | ![Complex Workflow](src/assets/screenshots/dashboard_workflow.png) |
+| *The initial start state of the workflow builder.* | *A complex workflow tree with multiple branches and actions.* |
 
 ---
 
